@@ -1,6 +1,7 @@
 import NewTask from "../Components/ToDoList/NewTask/NewTask";
 import Tasks from "../Components/ToDoList/Tasks/Tasks";
 import { useState } from "react";
+import Timer from "../Components/Timer/Timer";
 
 const DUMMY_TASKS = [
   { id: "a1", title: "Watch CS2030 Lecture", date: new Date(2022, 5, 14) },
@@ -18,6 +19,9 @@ const FrontPage = () => {
 
   return (
     <div>
+      <div>
+        <Timer />
+      </div>
       <div>
         <NewTask onAddTask={addTaskHandler}></NewTask>
         <Tasks tasks={tasks} />

@@ -1,0 +1,17 @@
+.clock {
+    display: flex;
+    margin: 0px
+}
+
+.clock-data {
+    margin: 10px 60px;
+}
+
+.clock p {
+    font-size: 35px;
+}
+
+.clock h2 {
+    font-size: 12px;
+    font-weight: bold;
+}
