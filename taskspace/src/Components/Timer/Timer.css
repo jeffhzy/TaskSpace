@@ -24,3 +24,9 @@
   margin-right: 1rem;
 }
 
+.timer button:hover,
+.timer button:active {
+  background-color: #510674;
+  border-color: #510674;
+}
+
