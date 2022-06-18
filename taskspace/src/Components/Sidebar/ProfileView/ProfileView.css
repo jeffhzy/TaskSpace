@@ -1,7 +1,7 @@
 .profile-container {
     margin-top: 10px;
-    width: 10rem;
-    margin-left: 25px;
+    width: 12rem;
+    margin-left: 28px;
 }
 
 .profile-icon {
@@ -10,6 +10,7 @@
     height: 10rem;
     width: 10rem;
     object-fit: cover;
+    margin-left: 13px;
 }
 
 .profile-text {
