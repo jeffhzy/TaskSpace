@@ -1,0 +1,30 @@
+.sidebarOptions {
+    height: 30rem;
+    width: 15rem;
+    background-color: #F2F4F5;
+    position: relative;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.sidebarOptions button {
+    font: inherit;
+    cursor: pointer;
+    border: 1px solid #F2F4F5;
+    background-color: #F2F4F5;
+    color: black;
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+}
+
+
+.sidebarOptions button:hover,
+.sidebarOptions button:active {
+    background-color: #a892ee;
+    border-color: #a892ee;
+  }

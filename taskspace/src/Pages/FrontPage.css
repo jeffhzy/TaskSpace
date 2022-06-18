@@ -1,0 +1,9 @@
+.pageOrientation {
+    display: flex; 
+    flex-direction: row;
+}
+
+.mainPart {
+    align-self: center;
+    margin-left: 10%;
+}

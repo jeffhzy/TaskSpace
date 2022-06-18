@@ -1,0 +1,28 @@
+.profile-container {
+    margin-top: 10px;
+    width: 12rem;
+    margin-left: 28px;
+}
+
+.profile-icon {
+    position: relative;
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    margin-left: 13px;
+}
+
+.profile-text {
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.profile-text-level {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #161C2A;
+}

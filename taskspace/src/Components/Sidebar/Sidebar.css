@@ -1,0 +1,9 @@
+.sidebar-container {
+    margin-top: 10px;
+    height: 100%;
+    width: 1rem;
+    background-color: #ffff;
+    border-radius: 7px;
+    margin-left: 10px;
+    align-items: center;
+}
