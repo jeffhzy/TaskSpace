@@ -1,8 +1,9 @@
 .pageOrientation {
-    display:flex; 
-    flex-direction:row;
+    display: flex; 
+    flex-direction: row;
 }
 
 .mainPart {
-    margin-left: 15%;
+    align-self: center;
+    margin-left: 10%;
 }
