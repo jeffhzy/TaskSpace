@@ -5,5 +5,9 @@
 
 .mainPart {
     align-self: center;
-    margin-left: 10%;
+    flex-basis: 80%;
+}
+
+.header-sidebar {
+    flex-basis: 20%;
 }
