@@ -4,6 +4,7 @@ import Tasks from "../Components/ToDoList/Tasks/Tasks";
 import { useState } from "react";
 import Timer from "../Components/Timer/Timer";
 import Sidebar from "../Components/Sidebar/Sidebar";
+import Header from "../Components/Header/Header";
 
 const DUMMY_TASKS = [
   { id: "a1", title: "Watch CS2030 Lecture", date: new Date(2022, 5, 14) },
@@ -22,6 +23,8 @@ const FrontPage = () => {
   };
 
   return (
+    <div>
+     <Header />
     <div className="pageOrientation">
       <Sidebar values={TESTPROFILEVALUES}/>
       <div className="mainPart">
@@ -29,6 +32,7 @@ const FrontPage = () => {
         <NewTask onAddTask={addTaskHandler}></NewTask>
         <Tasks tasks={tasks} />
       </div>
+    </div>
     </div>
   );
 };
