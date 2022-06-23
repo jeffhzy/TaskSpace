@@ -26,7 +26,7 @@ const FrontPage = () => {
     <div>
      <Header />
     <div className="pageOrientation">
-      <Sidebar values={TESTPROFILEVALUES}/>
+      <Sidebar className="header-sidebar" values={TESTPROFILEVALUES}/>
       <div className="mainPart">
         <Timer />
         <NewTask onAddTask={addTaskHandler}></NewTask>

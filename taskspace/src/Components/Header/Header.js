@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <AppBar position="static" style={{background: '#a892ee'}} elevation={1}>
-      <Container maxWidth="xl">
+      <Container maxWidth="false">
         <Toolbar disableGutters sx={{justifyContent:'space-between'}}>
           <Typography
             variant="h6"
