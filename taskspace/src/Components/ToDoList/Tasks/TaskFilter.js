@@ -8,9 +8,9 @@ const TaskFilter = (props) => {
 
   return (
     <div className="task-filter">
-      <div className="task-filter__control" onChange={changeDateHandler}>
+      <div className="task-filter__control">
         <label>Filter by due date</label>
-        <select value={props.selected}>
+        <select value={props.selected}  onChange={changeDateHandler}>
           <option value="all">All</option>
           <option value="today">Today</option>
           <option value="tomorrow">Tomorrow</option>

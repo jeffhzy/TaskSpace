@@ -1,63 +1,29 @@
-import { useAuth } from "../Hooks/useAuth";
-import { useForm } from "react-hook-form";
 import "./LoginPage.css";
-import { Button, TextField } from "@mui/material";
 import { Container } from "@mui/system";
+import { useState } from "react";
+import Login from "../Components/Login/Login";
+import Signup from "../Components/Login/Signup";
 
 const LoginPage = () => {
-  const { signin, singup } = useAuth;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [isSigningUp, setIsSigningUp] = useState(false);
+
+  const signUpHandler = () => {
+    setIsSigningUp(true);
+  };
+
+  const goBackHandler = () => {
+    setIsSigningUp(false);
+  };
 
   return (
     <div className="main-login">
       <Container maxWidth="xs">
         <h1>TaskSpace</h1>
-        <form
-          className="login-form"
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
-        >
-          <div className="login-form-input">
-            <TextField
-              {...register("email", {
-                required: "*This is a required field.",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address.",
-                },
-              })}
-              label="Email address"
-              variant="outlined"
-              fullWidth
-              error={!!errors?.email}
-              helperText={errors?.email ? errors.email.message : null}
-            />
-          </div>
-          <div className="login-form-input">
-            <TextField
-              {...register("password", {
-                required: "*This is a required field.",
-                minLength: {
-                  value: 6,
-                  message: "*Password needs to be at least 6 characters long.",
-                },
-              })}
-              label="Password"
-              variant="outlined"
-              fullWidth
-              error={!!errors?.password}
-              helperText={errors?.password ? errors.password.message : null}
-            />
-          </div>
-          <Button variant="contained" color="primary" type="submit" fullWidth>
-            Sign in
-          </Button>
-        </form>
+        {isSigningUp ? (
+          <Signup onGoBack={goBackHandler} />
+        ) : (
+          <Login onSignUp={signUpHandler} />
+        )}
       </Container>
     </div>
   );

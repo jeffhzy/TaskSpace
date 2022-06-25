@@ -1,0 +1,23 @@
+.signup__name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup__academic {
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup__input {
+  margin: 20px 0px;
+}
+
+.signup__buttons {
+    display: flex;
+    margin: 30px 0px;
+    justify-content: space-between;
+}
+
+
+
+

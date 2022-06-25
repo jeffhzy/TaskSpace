@@ -6,10 +6,7 @@ import Timer from "../Components/Timer/Timer";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import Header from "../Components/Header/Header";
 
-const DUMMY_TASKS = [
-  { id: "a1", title: "Watch CS2030 Lecture", date: new Date(2022, 5, 14) },
-  { id: "a2", title: "Finish MA1521 Assignment", date: new Date(2022, 5, 20) },
-];
+const DUMMY_TASKS = [];
 
 const TESTPROFILEVALUES = {name: "Taskspace User", level: 20, expVal: 153, expMax: 500};
 
