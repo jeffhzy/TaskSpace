@@ -22,6 +22,14 @@ const FrontPage = () => {
     });
   };
 
+  const deleteTaskHandler = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId.id));
+  }
+
+  const updateTaskHandler = (taskId, newtitle, newdate) => {
+    setTasks(tasks.map((task) => task.id === taskId ? {id: taskId, title: newtitle, date: newdate} : task));
+  }
+
   return (
     <div>
      <Header />
@@ -30,7 +38,7 @@ const FrontPage = () => {
       <div className="mainPart">
         <Timer />
         <NewTask onAddTask={addTaskHandler}></NewTask>
-        <Tasks tasks={tasks} />
+        <Tasks tasks={tasks} deleteHandler={deleteTaskHandler} updateHandler={updateTaskHandler}/>
       </div>
     </div>
     </div>

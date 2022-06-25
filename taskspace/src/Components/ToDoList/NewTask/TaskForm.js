@@ -5,6 +5,7 @@ import {today} from "../../../Others/Dates";
 const TaskForm = (props) => {
   const [enteredTask, setEnteredTask] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const taskChangeHandler = (event) => {
     setEnteredTask(event.target.value);
@@ -12,14 +13,14 @@ const TaskForm = (props) => {
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
+    console.log(enteredDate);
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const submitHandler = () => {
 
     const taskData = {
       title: enteredTask,
-      date: new Date(enteredDate),
+      date: new Date(enteredDate)
     };
 
     props.onSaveTaskData(taskData);
@@ -28,8 +29,18 @@ const TaskForm = (props) => {
     setEnteredDate("");
   };
 
+  const validSubmitHandler = (event) => {
+    event.preventDefault();
+    if (!(enteredTask!=="" && enteredDate!=="dd/mm/yyyy")) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+      submitHandler();
+    }
+  }
+
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={validSubmitHandler}>
       <div className="new-task__controls">
         <div className="new-task__control">
           <label>Task</label>
@@ -46,6 +57,7 @@ const TaskForm = (props) => {
         </div>
       </div>
       <div className="new-task__actions">
+      {isValid!==true ? <label>*Missing fields: Please fill in missing data</label> : <></>}
         <button type="button" onClick={props.onCancel}>
           Cancel
         </button>

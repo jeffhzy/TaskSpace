@@ -3,7 +3,7 @@ import "./NewTask.css";
 import { useState } from "react";
 
 const NewTask = (props) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   const saveTaskDataHandler = (enteredTaskData) => {
     const taskData = {
@@ -13,23 +13,23 @@ const NewTask = (props) => {
     props.onAddTask(taskData);
   };
 
-  const startEditingHandler = () => {
-    setIsEditing(true);
+  const startAddingHandler = () => {
+    setIsAdding(true);
   };
 
-  const stopEditingHandler = () => {
-    setIsEditing(false);
+  const stopAddingHandler = () => {
+    setIsAdding(false);
   };
 
   return (
     <div className="new-task">
-      {!isEditing && (
-        <button onClick={startEditingHandler}>Add New Task</button>
+      {!isAdding && (
+        <button onClick={startAddingHandler}>Add New Task</button>
       )}
-      {isEditing && (
+      {isAdding && (
         <TaskForm
           onSaveTaskData={saveTaskDataHandler}
-          onCancel={stopEditingHandler}
+          onCancel={stopAddingHandler}
         />
       )}
     </div>
