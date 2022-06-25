@@ -30,7 +30,7 @@ const submitHandler = () => {
 
 const validSubmitHandler = (event) => {
   event.preventDefault();
-  if (!(enteredTask!=="" && enteredDate!=="dd/mm/yyyy")) {
+  if (!(enteredTask!=="" && enteredDate!=="")) {
     setIsValid(false);
   } else {
     setIsValid(true);

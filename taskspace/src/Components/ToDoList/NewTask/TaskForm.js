@@ -13,7 +13,7 @@ const TaskForm = (props) => {
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
-    console.log(enteredDate);
+    console.log(event.target.value);
   };
 
   const submitHandler = () => {
@@ -31,7 +31,8 @@ const TaskForm = (props) => {
 
   const validSubmitHandler = (event) => {
     event.preventDefault();
-    if (!(enteredTask!=="" && enteredDate!=="dd/mm/yyyy")) {
+    console.log(enteredDate);
+    if (!(enteredTask!=="" && enteredDate!=="")) {
       setIsValid(false);
     } else {
       setIsValid(true);
