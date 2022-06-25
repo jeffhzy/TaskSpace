@@ -41,7 +41,7 @@ const Tasks = (props) => {
         selected={filteredDate}
         onDateChange={dateChangeHandler}
       ></TaskFilter>
-      <TaskList items={sortedList} />
+      <TaskList items={sortedList} deleteHandler={props.deleteHandler} updateHandler={props.updateHandler}/>
     </div>
   );
 };

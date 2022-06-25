@@ -24,3 +24,9 @@
 .new-task__actions {
   text-align: right;
 }
+
+.new-task__actions label {
+  color: rgb(206, 0, 0);
+  margin-right: 1rem;
+  font-size: 13px;
+}
