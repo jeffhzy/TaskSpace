@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { firebaseConfig } from "../Config/firebaseConfig";
+import { firebaseConfig, db } from "../Config/firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -36,9 +37,10 @@ function useProvideAuth() {
       }
     );
   };
-  const signup = (email, password) => {
+  const signup = (email, password, userDetails) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
-      (response) => {
+      async (response) => {
+        await setDoc(doc(db, "users", response.user.uid), {...userDetails, "email": email, "password": password});
         setUser(response.user);
         return response.user;
       }

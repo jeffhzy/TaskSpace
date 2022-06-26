@@ -3,6 +3,8 @@ import { academicYear, majors } from "../../Others/Academic";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Signup.css";
+import { db } from "../../Config/firebaseConfig"
+import { doc, setDoc } from "firebase/firestore";
 
 const Signup = (props) => {
   const {
@@ -16,9 +18,16 @@ const Signup = (props) => {
   return (
     <div>
       <form
-        onSubmit={handleSubmit((data) => {
-          signup(data.email, data.password);
-        })}
+        onSubmit={handleSubmit(async (data) => {
+          const userdetails = 
+          {firstName: data.firstName, 
+            lastName: data.lastName,
+            major: data.major,
+            year: data.year
+          };
+          signup(data.email, data.password, userdetails);
+        })
+      }
       >
         <div className="signup__name">
           <div className="signup__input">
