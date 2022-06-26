@@ -15,23 +15,23 @@ const FrontPage = () => {
   const [tasks, setTasks] = useState([]);
   const [userProfile, setUserProfile] = useState("");
   const [renderCount, setRenderCount] = useState(0);
+  const [exp, setExp] = useState(0);
 
   //to get from database
   useEffect(() => { 
-    const getTasks = async () => {
-    const taskData = await getDoc(doc(db, "users", user.uid));
-    if (taskData.data().tasks) {
-    setTasks(taskData.data().tasks);
+    const getStartInfo = async () => {
+    const Data = await getDoc(doc(db, "users", user.uid));
+    setExp(Data.data().points);
+    setTasks(Data.data().tasks);
+    setUserProfile({name: (Data.data().firstName+" "+Data.data().lastName), level: 20, expVal: Data.data().points, expMax: 300});
     };
-    setUserProfile({name: (taskData.data().firstName+" "+taskData.data().lastName), level: 20, expVal: 153, expMax: 500});
-    };
-    getTasks();
+    getStartInfo();
   }, []);
 
   const addTaskHandler = (task) => {
     setTasks((prevTasks) => {
       return [task, ...prevTasks];
-    });
+    }); 
   };
 
   const deleteTaskHandler = (taskId) => {
@@ -42,10 +42,20 @@ const FrontPage = () => {
     setTasks(tasks.map((task) => task.id === taskId ? {id: taskId, title: newtitle, date: newdate} : task));
   }
 
+  const setPointsHandler = (newPoints) => {
+    console.log(exp+newPoints);
+    const setPoints = async () => {
+      await setDoc(doc(db, "users", user.uid), {"points": (exp+newPoints)}, {merge:true});
+    };
+    setPoints();
+    setExp(exp+newPoints);
+    setUserProfile({...userProfile, expVal: exp});
+  }
+
  const convertTaskList = (tasklist) => {
     return tasklist ? tasklist.map((task) => true ? {id: task.id, title: task.title, date: new Date(task.date)}: {}) : tasklist;
   }
-  //to add to database
+  //to add to-do list data to database
   useEffect(() => {
     const addTasks = async () => {
       await setDoc(doc(db, "users", user.uid), {tasks}, {merge:true});
@@ -64,7 +74,7 @@ const FrontPage = () => {
     <div className="pageOrientation">
       <Sidebar className="header-sidebar" values={userProfile}/>
       <div className="mainPart">
-        <Timer />
+        <Timer setPointHandler={setPointsHandler}/>
         <NewTask onAddTask={addTaskHandler}></NewTask>
         <Tasks tasks={convertTaskList(tasks)} deleteHandler={deleteTaskHandler} updateHandler={updateTaskHandler}/>
       </div>

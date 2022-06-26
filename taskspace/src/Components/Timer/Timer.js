@@ -5,7 +5,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
-const Timer = () => {
+const Timer = (props) => {
   const [isTiming, setIsTiming] = useState(false);
   const [time, setTime] = useState(0);
   const [timerID, setTimerID] = useState(0);
@@ -24,10 +24,11 @@ const Timer = () => {
   };
 
   const onLogHandler = () => {
-    const points = Math.round(time / 100);
+    const newPoints = (time / 100);
     setTime(0);
     setIsTiming(false);
-  }
+    props.setPointHandler(newPoints);
+  };
 
   useEffect(() => {
     let intervalID;

@@ -25,7 +25,9 @@ const Signup = (props) => {
           {firstName: data.firstName, 
             lastName: data.lastName,
             major: data.major,
-            year: data.year
+            year: data.year,
+            points: 0,
+            tasks: [],
           };
           signup(data.email, data.password, userdetails).catch(error => setValidSignup(false));
         })

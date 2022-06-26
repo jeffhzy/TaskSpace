@@ -39,7 +39,7 @@ function useProvideAuth() {
   const signup = (email, password, userDetails) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
       async (response) => {
-        await setDoc(doc(db, "users", response.user.uid), {...userDetails, "email": email, "password": password, tasks: []});
+        await setDoc(doc(db, "users", response.user.uid), {...userDetails, "email": email});
         setUser(response.user);
         return response.user;
       })

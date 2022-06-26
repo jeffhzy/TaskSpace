@@ -5,7 +5,7 @@ import ProfileView from "./ProfileView/ProfileView";
 //takes in name, level, expMax and expVal
 const Sidebar = (props) => {
     const values = props.values;
-    const exp = values.expVal + "/" + values.expMax;
+    const exp = Math.floor(values.expVal) + "/" + values.expMax;
     const progress = Math.floor(values.expVal/values.expMax * 100) + "%";
     return (
         <div className="sidebar-container">
