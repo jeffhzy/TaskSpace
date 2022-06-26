@@ -6,16 +6,13 @@ import Timer from "../Components/Timer/Timer";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import Header from "../Components/Header/Header";
 import { useAuth } from "../Hooks/useAuth";
-import { firebaseConfig, db } from "../Config/firebaseConfig";
+import { db } from "../Config/firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-
-const DUMMY_TASKS = [];
-const TESTPROFILEVALUES = {name: "Taskspace User", level: 20, expVal: 153, expMax: 500};
 
 const FrontPage = () => {
 
   const { user } = useAuth();
-  const [tasks, setTasks] = useState(DUMMY_TASKS);
+  const [tasks, setTasks] = useState([]);
   const [userProfile, setUserProfile] = useState("");
   const [renderCount, setRenderCount] = useState(0);
 
@@ -26,7 +23,6 @@ const FrontPage = () => {
     if (taskData.data().tasks) {
     setTasks(taskData.data().tasks);
     };
-    console.log(taskData.data().firstName + taskData.data().lastName);
     setUserProfile({name: (taskData.data().firstName+" "+taskData.data().lastName), level: 20, expVal: 153, expMax: 500});
     };
     getTasks();
@@ -56,11 +52,9 @@ const FrontPage = () => {
     };
     if (renderCount > 1) {
       setRenderCount(renderCount + 1);
-      console.log(renderCount);
       addTasks();
     } else {
       setRenderCount(renderCount + 1);
-      console.log(renderCount);
     }
   }, [tasks]);
 

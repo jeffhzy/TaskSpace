@@ -16,8 +16,8 @@ const TaskItem = (props) => {
 
   const SubmitHandler = (newtitle, newdate) => {
     setTaskTitle(newtitle);
-    setTaskDate(newdate);
-    props.updateHandler(props.id, newtitle, new Date(newdate));
+    setTaskDate(new Date(newdate));
+    props.updateHandler(props.id, newtitle, newdate);
     TaskEditingHandler();
   }
 
