@@ -14,7 +14,7 @@ const SearchBar = () => {
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search notes or people"
       />
-      <IconButton type="submit" sx={{ p: '8px' }} aria-label="search">
+      <IconButton type="submit" sx={{ p: '8px' }} aria-label="search" style={{outline:"none"}}>
         <SearchIcon />
       </IconButton>
 

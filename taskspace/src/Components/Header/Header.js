@@ -43,7 +43,7 @@ const Header = () => {
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
-            }}
+            }} 
           >
             TASKSPACE
           </Typography>
@@ -53,7 +53,7 @@ const Header = () => {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} style={{outline:"none"}}>
                   <MenuIcon sx={{ mt: "10px" }} />
                 </IconButton>
               </Tooltip>
