@@ -3,6 +3,7 @@ import { academicYear, majors } from "../../Others/Academic";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Signup.css";
+import { useState } from "react";
 import { db } from "../../Config/firebaseConfig"
 import { doc, setDoc } from "firebase/firestore";
 
@@ -14,6 +15,7 @@ const Signup = (props) => {
     watch,
   } = useForm();
   const { signup } = useAuth();
+  const [validSignup, setValidSignup] = useState(true);
 
   return (
     <div>
@@ -25,7 +27,7 @@ const Signup = (props) => {
             major: data.major,
             year: data.year
           };
-          signup(data.email, data.password, userdetails);
+          signup(data.email, data.password, userdetails).catch(error => setValidSignup(false));
         })
       }
       >
@@ -65,7 +67,7 @@ const Signup = (props) => {
               },
             })}
             error={!!errors?.email}
-            helperText={errors?.email ? errors.email.message : null}
+            helperText={validSignup? (errors?.email ? errors.email.message : null) : "*Email account is already in use."}
           />
         </div>
         <div className="signup__input">
