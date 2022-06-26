@@ -5,8 +5,9 @@ import LoginPage from "./Pages/LoginPage";
 
 const App = () => {
   const { user } = useAuth();
-
+  
   return <ProvideAuth>{user ? <FrontPage /> : <LoginPage />};</ProvideAuth>;
+
 };
 
 export default App;
