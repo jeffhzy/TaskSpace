@@ -23,7 +23,7 @@ const FrontPage = () => {
     const Data = await getDoc(doc(db, "users", user.uid));
     setExp(Data.data().points);
     setTasks(Data.data().tasks);
-    setUserProfile({name: (Data.data().firstName+" "+Data.data().lastName), level: 20, expVal: Data.data().points, expMax: 300});
+    setUserProfile({name: (Data.data().firstName+" "+Data.data().lastName), level: Math.floor(Data.data().points/300) + 1, expVal: Data.data().points%300, expMax: 300});
     };
     getStartInfo();
   }, []);
