@@ -23,7 +23,7 @@ const FrontPage = () => {
     const Data = await getDoc(doc(db, "users", user.uid));
     setExp(Data.data().points);
     setTasks(Data.data().tasks);
-    setUserProfile({name: (Data.data().firstName+" "+Data.data().lastName), level: Math.floor(Data.data().points/300) + 1, expVal: Data.data().points%300, expMax: 300});
+    setUserProfile({name: (Data.data().firstName+" "+Data.data().lastName), expVal: Data.data().points, expMax: 2});
     };
     getStartInfo();
   }, []);
@@ -43,13 +43,12 @@ const FrontPage = () => {
   }
 
   const setPointsHandler = (newPoints) => {
-    console.log(exp+newPoints);
     const setPoints = async () => {
       await setDoc(doc(db, "users", user.uid), {"points": (exp+newPoints)}, {merge:true});
     };
     setPoints();
     setExp(exp+newPoints);
-    setUserProfile({...userProfile, expVal: exp});
+    setUserProfile({...userProfile, expVal: exp+newPoints});
   }
 
  const convertTaskList = (tasklist) => {
