@@ -1,10 +1,12 @@
 import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { Button, TextField } from "@mui/material";
+import { useState } from "react";
 import "./Login.css";
 
 const Login = (props) => {
   const { signin } = useAuth();
+  const [hasError, sethasError] = useState(false);
   const {
     register,
     handleSubmit,
@@ -16,7 +18,7 @@ const Login = (props) => {
       <form
         className="login-form"
         onSubmit={handleSubmit((data) => {
-          signin(data.email, data.password);
+          let response = signin(data.email, data.password).catch(error => sethasError(true));
         })}
       >
         <div className="login-form-input">
@@ -32,7 +34,7 @@ const Login = (props) => {
             variant="outlined"
             fullWidth
             error={!!errors?.email}
-            helperText={errors?.email ? errors.email.message : null}
+            helperText={hasError ? "*Email or password is invalid." : (errors?.email ? errors.email.message : null)}
           />
         </div>
         <div className="login-form-input">

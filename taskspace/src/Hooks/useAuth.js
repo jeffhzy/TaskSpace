@@ -30,12 +30,11 @@ function useProvideAuth() {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
   const signin = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password).then(
-      (response) => {
+    return signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
         setUser(response.user);
         return response.user;
-      }
-    );
+      });
   };
   const signup = (email, password, userDetails) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
@@ -43,8 +42,7 @@ function useProvideAuth() {
         await setDoc(doc(db, "users", response.user.uid), {...userDetails, "email": email, "password": password});
         setUser(response.user);
         return response.user;
-      }
-    );
+      })
   };
   const signout = () => {
     return auth.signOut().then(() => {

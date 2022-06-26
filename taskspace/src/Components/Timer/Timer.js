@@ -23,6 +23,12 @@ const Timer = () => {
     setIsTiming(false);
   };
 
+  const onLogHandler = () => {
+    const points = Math.round(time / 100);
+    setTime(0);
+    setIsTiming(false);
+  }
+
   useEffect(() => {
     let intervalID;
     if (isTiming) {
@@ -54,7 +60,7 @@ const Timer = () => {
         <button onClick={onResetHandler}>
           <RestartAltIcon />
         </button>
-        <button className="timer__log">Log Session</button>
+        <button className="timer__log" onClick={onLogHandler}>Log Session</button>
       </div>
     </div>
   );
