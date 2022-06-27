@@ -18,16 +18,16 @@ const Tasks = (props) => {
       filtered = props.tasks;
       break;
     case "today":
-      filtered = props.tasks.filter((task) => task.date <= new Date(today));
+      filtered = props.tasks.filter((task) => new Date(task.date) <= new Date(today));
       break;
     case "tomorrow":
-      filtered = props.tasks.filter((task) => task.date <= new Date(tomorrow));
+      filtered = props.tasks.filter((task) => new Date(task.date) <= new Date(tomorrow));
       break;
     case "week":
-      filtered = props.tasks.filter((task) => task.date <= new Date(nextWeek));
+      filtered = props.tasks.filter((task) => new Date(task.date) <= new Date(nextWeek));
       break;
     case "month":
-      filtered = props.tasks.filter((task) => task.date <= new Date(nextMonth));
+      filtered = props.tasks.filter((task) => new Date(task.date) <= new Date(nextMonth));
       break;
     default:
       break;
