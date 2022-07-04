@@ -1,0 +1,16 @@
+.uploadpic-container {
+ align-items: center;
+}
+
+.uploadpic-container img {
+    position: relative;
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
+    object-fit: cover;
+    margin-left: 20px;
+}
+
+.uploadpic-container button {
+margin: 20px;
+}

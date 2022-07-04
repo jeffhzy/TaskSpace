@@ -1,0 +1,10 @@
+.friend-pageOrientation {
+    display: flex;
+    flex-direction: row;
+}
+
+.friend-mainPart {
+    flex-basis: 80%;
+    text-align: center;
+    margin-top: 5px;
+}

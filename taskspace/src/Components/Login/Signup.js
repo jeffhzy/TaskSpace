@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Signup.css";
 import { useState } from "react";
-import { db } from "../../Config/firebaseConfig"
-import { doc, setDoc } from "firebase/firestore";
 
 const Signup = (props) => {
   const {
@@ -28,6 +26,8 @@ const Signup = (props) => {
             year: data.year,
             points: 0,
             tasks: [],
+            requests: [],
+            friends: [],
           };
           signup(data.email, data.password, userdetails).catch(error => setValidSignup(false));
         })

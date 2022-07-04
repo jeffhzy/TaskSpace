@@ -1,0 +1,27 @@
+.container-friendRequest {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   width: 100%;
+   padding: 5px;
+}
+
+.container-friendRequest img {
+   position: relative;
+   border-radius: 50%;
+   height: 2.5rem;
+   width: 2.5rem;
+   object-fit: cover;
+}
+
+.container-friendRequest label {
+   font-weight: bold;
+   margin-left: 1rem;
+   margin-top: 5px;
+}
+
+.container-friendRequest button {
+   height: 2rem;
+   margin-left: 1rem;
+   margin-top: 3px;
+}

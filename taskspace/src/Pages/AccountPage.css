@@ -5,6 +5,8 @@
 
 .mainPart {
     flex-basis: 80%;
+    text-align: center;
+    margin: 2rem;
 }
 
 .header-sidebar {

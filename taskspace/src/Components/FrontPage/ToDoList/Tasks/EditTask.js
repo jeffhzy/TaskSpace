@@ -1,6 +1,6 @@
 import "./EditTask.css";
 import { useState } from 'react'; 
-import { today } from "../../../Others/Dates";
+import { today } from "../../../../Others/Dates";
 
 const EditTask = (props) => {
 

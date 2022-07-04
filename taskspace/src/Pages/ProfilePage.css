@@ -1,0 +1,30 @@
+.profile-pageOrientation {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-mainPart {
+    flex-basis: 80%;
+    text-align: center;
+    margin: 1rem;
+}
+
+.profile-mainPart img {
+    position: relative;
+    border-radius: 50%;
+    height: 15rem;
+    width: 15rem;
+    margin: auto;
+    object-fit: cover;
+}
+
+.profile-mainPart label {
+    margin-top: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.profile-header-sidebar {
+    flex-basis: 20%;
+}

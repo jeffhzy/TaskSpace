@@ -47,6 +47,7 @@ const Timer = (props) => {
         clearInterval(timerID);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTiming]);
 
   return (

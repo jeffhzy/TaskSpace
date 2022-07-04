@@ -1,8 +1,8 @@
 import "./FrontPage.css"
-import NewTask from "../Components/ToDoList/NewTask/NewTask";
-import Tasks from "../Components/ToDoList/Tasks/Tasks";
+import NewTask from "../Components/FrontPage/ToDoList/NewTask/NewTask";
+import Tasks from "../Components/FrontPage/ToDoList/Tasks/Tasks";
 import { useState, useEffect } from "react";
-import Timer from "../Components/Timer/Timer";
+import Timer from "../Components/FrontPage/Timer/Timer";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import Header from "../Components/Header/Header";
 import { useAuth } from "../Hooks/useAuth";
@@ -18,20 +18,21 @@ const FrontPage = () => {
   const [exp, setExp] = useState(0);
 
   //to get from database
-  useEffect(() => { 
+  useEffect(() => {
     const getStartInfo = async () => {
-    const Data = await getDoc(doc(db, "users", user.uid));
-    setExp(Data.data().points);
-    setTasks(Data.data().tasks);
-    setUserProfile({name: (Data.data().firstName+" "+Data.data().lastName), expVal: Data.data().points, expMax: 2});
+      const Data = await getDoc(doc(db, "users", user.uid));
+      setExp(Data.data().points);
+      setTasks(Data.data().tasks);
+      setUserProfile({ name: (Data.data().firstName + " " + Data.data().lastName), expVal: Data.data().points, expMax: 300 });
     };
     getStartInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addTaskHandler = (task) => {
     setTasks((prevTasks) => {
       return [task, ...prevTasks];
-    }); 
+    });
   };
 
   const deleteTaskHandler = (taskId) => {
@@ -39,25 +40,25 @@ const FrontPage = () => {
   }
 
   const updateTaskHandler = (taskId, newtitle, newdate) => {
-    setTasks(tasks.map((task) => task.id === taskId ? {id: taskId, title: newtitle, date: newdate} : task));
+    setTasks(tasks.map((task) => task.id === taskId ? { id: taskId, title: newtitle, date: newdate } : task));
   }
 
   const setPointsHandler = (newPoints) => {
     const setPoints = async () => {
-      await setDoc(doc(db, "users", user.uid), {"points": (exp+newPoints)}, {merge:true});
+      await setDoc(doc(db, "users", user.uid), { "points": (exp + newPoints) }, { merge: true });
     };
     setPoints();
-    setExp(exp+newPoints);
-    setUserProfile({...userProfile, expVal: exp+newPoints});
+    setExp(exp + newPoints);
+    setUserProfile({ ...userProfile, expVal: exp + newPoints });
   }
 
- const convertTaskList = (tasklist) => {
-    return tasklist ? tasklist.map((task) => true ? {id: task.id, title: task.title, date: new Date(task.date)}: {}) : tasklist;
+  const convertTaskList = (tasklist) => {
+    return tasklist ? tasklist.map((task) => true ? { id: task.id, title: task.title, date: new Date(task.date) } : {}) : tasklist;
   }
   //to add to-do list data to database
   useEffect(() => {
     const addTasks = async () => {
-      await setDoc(doc(db, "users", user.uid), {tasks}, {merge:true});
+      await setDoc(doc(db, "users", user.uid), { tasks }, { merge: true });
     };
     if (renderCount > 1) {
       setRenderCount(renderCount + 1);
@@ -65,20 +66,22 @@ const FrontPage = () => {
     } else {
       setRenderCount(renderCount + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks]);
 
   return (
     <div>
-     <Header />
-    <div className="pageOrientation">
-      <Sidebar className="header-sidebar" values={userProfile}/>
-      <div className="mainPart">
-        <Timer setPointHandler={setPointsHandler}/>
-        <NewTask onAddTask={addTaskHandler}></NewTask>
-        <Tasks tasks={convertTaskList(tasks)} deleteHandler={deleteTaskHandler} updateHandler={updateTaskHandler}/>
+      <Header />
+      <div className="pageOrientation">
+        <Sidebar className="header-sidebar" values={userProfile} />
+        <div className="mainPart">
+          <Timer setPointHandler={setPointsHandler} />
+          <NewTask onAddTask={addTaskHandler}></NewTask>
+          <Tasks tasks={convertTaskList(tasks)} deleteHandler={deleteTaskHandler} updateHandler={updateTaskHandler} />
+        </div>
       </div>
     </div>
-    </div>
+
   );
 };
 

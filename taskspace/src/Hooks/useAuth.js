@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { firebaseConfig, db } from "../Config/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,

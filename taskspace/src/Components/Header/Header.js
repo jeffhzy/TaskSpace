@@ -41,8 +41,8 @@ const Header = () => {
               display: { xs: "none", md: "flex" },
               fontFamily: "verdana",
               letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
+              color: 'white !important',
+              textDecoration: "none !important",
             }} 
           >
             TASKSPACE
