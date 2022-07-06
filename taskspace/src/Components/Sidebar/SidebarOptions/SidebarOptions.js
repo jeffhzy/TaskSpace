@@ -9,26 +9,13 @@ import { Link } from "react-router-dom";
 const SidebarOptions = () => {
   return (
     <div className="sidebarOptions">
-      <button>
-        <HomeIcon />
-        <Link to="/">Main</Link>
-      </button>
-      <button>
-        <GroupIcon />
-        <Link to="/friends">Friends</Link>
-      </button>
-      <button>
-        <ChatIcon />
-        <Link to="/chats">Chats</Link>
-      </button>
-      <button>
-        <NotesIcon />
-        <Link to="/notes">Notes</Link>
-      </button>
-      <button>
-        <LeaderboardIcon />
-        <Link to="/leaderboard">Leaderboards</Link>
-      </button>
+      
+        
+        <Link to="/"><button><HomeIcon />Main</button></Link>
+        <Link to="/friends"><button><GroupIcon />Friends</button></Link> 
+        <Link to="/chats"><button><ChatIcon />Chats</button></Link>
+        <Link to="/notes"><button><NotesIcon />Notes</button></Link>
+        <Link to="/leaderboard"><button><LeaderboardIcon />Leaderboards</button></Link>
     </div>
   );
 };
