@@ -8,7 +8,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import "./Main.css";
-import Friends from "./Friends";
+import FriendPage from "./FriendPage";
 import Chats from "./Chats";
 import Notes from "./Notes";
 
@@ -56,7 +56,7 @@ const Main = () => {
                 path="/"
                 element={<FrontPage changeExp={setPointsHandler} />}
               />
-              <Route path="/friends" element={<Friends />} />
+              <Route path="/friends" element={<FriendPage />} />
               <Route path="/chats" element={<Chats />} />
               <Route path="/notes" element={<Notes />} />
               <Route path="/leaderboard" element={<Leaderboard />} />

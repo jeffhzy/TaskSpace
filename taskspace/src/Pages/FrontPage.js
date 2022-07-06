@@ -1,8 +1,8 @@
 import "./FrontPage.css";
-import NewTask from "../Components/ToDoList/NewTask/NewTask";
-import Tasks from "../Components/ToDoList/Tasks/Tasks";
+import NewTask from "../Components/FrontPage/ToDoList/NewTask/NewTask";
+import Tasks from "../Components/FrontPage/ToDoList/Tasks/Tasks";
 import { useState, useEffect } from "react";
-import Timer from "../Components/Timer/Timer";
+import Timer from "../Components/FrontPage/Timer/Timer";
 import { useAuth } from "../Hooks/useAuth";
 import { db } from "../Config/firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
