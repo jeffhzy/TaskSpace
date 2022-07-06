@@ -1,0 +1,9 @@
+.pageOrientation {
+  display: flex;
+  flex-direction: row;
+}
+
+.mainPart {
+  align-self: auto;
+  flex-basis: 80%;
+}

@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+
+.ranking {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 400px 0px 300px;
+}
+
+#ranking-name {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  margin: 0;
+}
+
+#ranking-major {
+  font-family: "Fira Sans", sans-serif;
+  font-style: italic;
+  font-size: medium;
+  margin-bottom: 30px;
+}
+
+#ranking-points {
+  font-family: "Fira Sans";
+  text-align: center;
+  margin: 20px 0px 0px 0px;
+  font-size: larger;
+}

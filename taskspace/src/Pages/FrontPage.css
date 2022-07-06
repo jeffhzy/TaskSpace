@@ -1,13 +1,3 @@
-.pageOrientation {
-    display: flex; 
-    flex-direction: row;
-}
-
-.mainPart {
-    align-self: center;
-    flex-basis: 80%;
-}
-
-.header-sidebar {
-    flex-basis: 20%;
-}
+/* .header-sidebar {
+  flex-basis: 20%;
+} */
