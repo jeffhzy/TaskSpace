@@ -13,7 +13,7 @@ const ProfileView = (props) => {
     const exp = props.exp;
 
     useEffect(() => {
-        listAll(ref(storage, `${user.uid}/profilepic`)).then((res) => {
+        listAll(ref(storage, `${user.uid}`)).then((res) => {
             if (res.items.length > 0) {
             getDownloadURL(ref(storage, `${user.uid}/profilepic`))
             .then((url) => {

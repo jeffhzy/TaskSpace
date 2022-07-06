@@ -11,7 +11,7 @@ import "./Main.css";
 import Chats from "./Chats";
 import Notes from "./Notes";
 import FriendPage from "./FriendPage";
-import ProfilePicUpload from "../Components/Account/ProfilePicUpload/ProfilePicUpload";
+import AccountPage from "./AccountPage";
 
 const Main = () => {
   const { user } = useAuth();
@@ -61,7 +61,7 @@ const Main = () => {
               <Route path="/chats" element={<Chats />} />
               <Route path="/notes" element={<Notes />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/account" element={<ProfilePicUpload />} />
+              <Route path="/account" element={<AccountPage />} />
             </Routes>
           </div>
         </div>
