@@ -11,8 +11,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SearchBar from "./SearchBar";
 import { useAuth } from "../../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
-const settings = ["Profile", "Account"];
+const settings = ["Profile"];
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -41,9 +42,9 @@ const Header = () => {
               display: { xs: "none", md: "flex" },
               fontFamily: "verdana",
               letterSpacing: ".1rem",
-              color: 'white !important',
+              color: "white !important",
               textDecoration: "none !important",
-            }} 
+            }}
           >
             TASKSPACE
           </Typography>
@@ -53,7 +54,11 @@ const Header = () => {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} style={{outline:"none"}}>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                  style={{ outline: "none" }}
+                >
                   <MenuIcon sx={{ mt: "10px" }} />
                 </IconButton>
               </Tooltip>
@@ -79,6 +84,11 @@ const Header = () => {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+                <Link to="/account">
+                  <MenuItem key="Account" onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">Account</Typography>
+                  </MenuItem>
+                </Link>
                 <MenuItem key="Log Out" onClick={signout}>
                   <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>

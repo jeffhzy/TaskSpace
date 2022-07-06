@@ -8,16 +8,11 @@ import "./Leaderboard.css";
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
 
-  console.log("render");
-  console.log(users);
-
   useEffect(() => {
     const insertData = async () => {
       const Data = await getDocs(collection(db, "users"));
       Data.forEach((doc) => {
         users.push(doc.data());
-        console.log("inside");
-        console.log(users);
       });
       // getDocs(collection(db, "users")).then((docs) => {
       //   docs.forEach((doc) => {

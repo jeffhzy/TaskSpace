@@ -8,9 +8,10 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import "./Main.css";
-import FriendPage from "./FriendPage";
 import Chats from "./Chats";
 import Notes from "./Notes";
+import FriendPage from "./FriendPage";
+import ProfilePicUpload from "../Components/Account/ProfilePicUpload/ProfilePicUpload";
 
 const Main = () => {
   const { user } = useAuth();
@@ -46,9 +47,9 @@ const Main = () => {
 
   return (
     <div>
-      <Header />
-      <div className="pageOrientation">
-        <Router>
+      <Router>
+        <Header />
+        <div className="pageOrientation">
           <Sidebar values={userProfile} />
           <div className="mainPart">
             <Routes>
@@ -60,10 +61,11 @@ const Main = () => {
               <Route path="/chats" element={<Chats />} />
               <Route path="/notes" element={<Notes />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/account" element={<ProfilePicUpload />} />
             </Routes>
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     </div>
   );
 };

@@ -6,16 +6,9 @@ import ProfilePicUpload from "../Components/Account/ProfilePicUpload/ProfilePicU
 
 const AccountPage = () => {
     return (
-        <>
-            <Header />
-            <div className="pageOrientation">
-                <Sidebar className="header-sidebar" values={{}} />
-                <div className="mainPart">
-                    <ProfilePicUpload />
-                </div>
-            </div>
-        </>
-
+        <div>
+            <ProfilePicUpload />
+        </div>
     );
 };
 
