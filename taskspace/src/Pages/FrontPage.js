@@ -1,32 +1,24 @@
-import "./FrontPage.css"
-import NewTask from "../Components/FrontPage/ToDoList/NewTask/NewTask";
-import Tasks from "../Components/FrontPage/ToDoList/Tasks/Tasks";
+import "./FrontPage.css";
+import NewTask from "../Components/ToDoList/NewTask/NewTask";
+import Tasks from "../Components/ToDoList/Tasks/Tasks";
 import { useState, useEffect } from "react";
-import Timer from "../Components/FrontPage/Timer/Timer";
-import Sidebar from "../Components/Sidebar/Sidebar";
-import Header from "../Components/Header/Header";
+import Timer from "../Components/Timer/Timer";
 import { useAuth } from "../Hooks/useAuth";
 import { db } from "../Config/firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
-const FrontPage = () => {
-
+const FrontPage = (props) => {
   const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
-  const [userProfile, setUserProfile] = useState("");
   const [renderCount, setRenderCount] = useState(0);
-  const [exp, setExp] = useState(0);
 
-  //to get from database
   useEffect(() => {
-    const getStartInfo = async () => {
+    const getTasks = async () => {
       const Data = await getDoc(doc(db, "users", user.uid));
-      setExp(Data.data().points);
       setTasks(Data.data().tasks);
-      setUserProfile({ name: (Data.data().firstName + " " + Data.data().lastName), expVal: Data.data().points, expMax: 300 });
     };
-    getStartInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getTasks();
+
   }, []);
 
   const addTaskHandler = (task) => {
@@ -37,24 +29,28 @@ const FrontPage = () => {
 
   const deleteTaskHandler = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId.id));
-  }
+  };
 
   const updateTaskHandler = (taskId, newtitle, newdate) => {
-    setTasks(tasks.map((task) => task.id === taskId ? { id: taskId, title: newtitle, date: newdate } : task));
-  }
-
-  const setPointsHandler = (newPoints) => {
-    const setPoints = async () => {
-      await setDoc(doc(db, "users", user.uid), { "points": (exp + newPoints) }, { merge: true });
-    };
-    setPoints();
-    setExp(exp + newPoints);
-    setUserProfile({ ...userProfile, expVal: exp + newPoints });
-  }
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId
+          ? { id: taskId, title: newtitle, date: newdate }
+          : task
+      )
+    );
+  };
 
   const convertTaskList = (tasklist) => {
-    return tasklist ? tasklist.map((task) => true ? { id: task.id, title: task.title, date: new Date(task.date) } : {}) : tasklist;
-  }
+    return tasklist
+      ? tasklist.map((task) =>
+          true
+            ? { id: task.id, title: task.title, date: new Date(task.date) }
+            : {}
+        )
+      : tasklist;
+  };
+
   //to add to-do list data to database
   useEffect(() => {
     const addTasks = async () => {
@@ -71,17 +67,14 @@ const FrontPage = () => {
 
   return (
     <div>
-      <Header />
-      <div className="pageOrientation">
-        <Sidebar className="header-sidebar" values={userProfile} />
-        <div className="mainPart">
-          <Timer setPointHandler={setPointsHandler} />
-          <NewTask onAddTask={addTaskHandler}></NewTask>
-          <Tasks tasks={convertTaskList(tasks)} deleteHandler={deleteTaskHandler} updateHandler={updateTaskHandler} />
-        </div>
-      </div>
+      <Timer setPointHandler={props.changeExp} />
+      <NewTask onAddTask={addTaskHandler}></NewTask>
+      <Tasks
+        tasks={convertTaskList(tasks)}
+        deleteHandler={deleteTaskHandler}
+        updateHandler={updateTaskHandler}
+      />
     </div>
-
   );
 };
 

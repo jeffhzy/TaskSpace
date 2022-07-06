@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@700&display=swap");
+
+
+.leaderboard h2 {
+  margin: 40px 0px 50px 475px;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-weight: bold;
+}
+
+.leaderboard-buttons {
+  margin: 40px 400px;
+}
+
+.leaderboard button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  border: 1px solid #40005d;
+  background-color: #40005d;
+  color: white;
+  border-radius: 12px;
+}
+
+.leaderboard button:hover,
+.leaderboard button:active {
+  background-color: #510674;
+  border-color: #510674;
+}
+
+#friends-button {
+  margin-left: 130px;
+}
