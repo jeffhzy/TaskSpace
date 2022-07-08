@@ -1,5 +1,5 @@
 .uploadpic-container {
- align-items: center;
+    align-items: center;
 }
 
 .uploadpic-container img {
@@ -12,5 +12,5 @@
 }
 
 .uploadpic-container button {
-margin: 20px;
+    margin: 20px;
 }
