@@ -84,9 +84,12 @@ const Header = () => {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
-                <Link to="/account">
+                <Link style={{textDecoration: 'none'}} to="/account">
                   <MenuItem key="Account" onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">Account</Typography>
+                    <Typography 
+                    sx={{textDecoration: "none !important", color: "#484848 !important",}} 
+                    textAlign="center">Account
+                    </Typography>
                   </MenuItem>
                 </Link>
                 <MenuItem key="Log Out" onClick={signout}>
