@@ -13,12 +13,11 @@ import SearchBar from "./SearchBar";
 import { useAuth } from "../../Hooks/useAuth";
 import { Link } from "react-router-dom";
 
-const settings = ["Profile"];
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const { signout } = useAuth();
+  const { user, signout } = useAuth();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -79,11 +78,11 @@ const Header = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                <Link to={"/profile/" + user.uid}>
+                  <MenuItem key="Profile" onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">Profile</Typography>
                   </MenuItem>
-                ))}
+                </Link>
                 <Link to="/account">
                   <MenuItem key="Account" onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">Account</Typography>

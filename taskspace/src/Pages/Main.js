@@ -4,7 +4,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import FrontPage from "./FrontPage";
 import Leaderboard from "./Leaderboard";
 import { db } from "../Config/firebaseConfig";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc} from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import "./Main.css";
@@ -12,11 +12,18 @@ import Chats from "./Chats";
 import Notes from "./Notes";
 import FriendPage from "./FriendPage";
 import AccountPage from "./AccountPage";
+import ProfilePage from "./ProfilePage";
+import getContentData from "../Others/ImportAllData";
 
 const Main = () => {
   const { user } = useAuth();
   const [userProfile, setUserProfile] = useState("");
   const [exp, setExp] = useState(0);
+  const [allUsers, setAllUsers] = useState([]);
+
+  useEffect(() => {
+    getContentData().then(setAllUsers);
+  }, [allUsers]);
 
   //to get from database
   useEffect(() => {
@@ -62,6 +69,13 @@ const Main = () => {
               <Route path="/notes" element={<Notes />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/account" element={<AccountPage />} />
+              <Route path="" element={<ProfilePage />} />
+              {allUsers.map((currentUser) => (
+                <Route
+                  path={"/profile/" + currentUser.id}
+                  element={<ProfilePage id={currentUser.id} />}
+                />
+              ))}
             </Routes>
           </div>
         </div>
