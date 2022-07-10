@@ -2,27 +2,43 @@
 
 .ranking {
   display: flex;
-  justify-content: space-between;
   margin: 0px 400px 0px 300px;
+}
+
+.ranking img {
+  position: relative;
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+  object-fit: cover;
+}
+
+.ranking-name-major-points {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ranking-particulars {
+  width: 320px;
 }
 
 #ranking-name {
   font-family: "Fira Sans", sans-serif;
   font-weight: bold;
   font-size: larger;
-  margin: 0;
+  margin: 8px 0 0 20px;
 }
 
 #ranking-major {
   font-family: "Fira Sans", sans-serif;
   font-style: italic;
   font-size: medium;
-  margin-bottom: 30px;
+  margin: 0 30px 40px 20px;
 }
 
 #ranking-points {
   font-family: "Fira Sans";
   text-align: center;
-  margin: 20px 0px 0px 0px;
+  margin: 20px 100px 0px 0px;
   font-size: larger;
 }

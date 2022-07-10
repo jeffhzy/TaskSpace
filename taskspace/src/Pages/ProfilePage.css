@@ -1,14 +1,3 @@
-.profile-pageOrientation {
-    display: flex;
-    flex-direction: row;
-}
-
-.profile-mainPart {
-    flex-basis: 80%;
-    text-align: center;
-    margin: 1rem;
-}
-
 .profile-mainPart img {
     position: relative;
     border-radius: 50%;
@@ -23,8 +12,4 @@
     width: 100%;
     font-weight: bold;
     font-size: 2rem;
-}
-
-.profile-header-sidebar {
-    flex-basis: 20%;
 }

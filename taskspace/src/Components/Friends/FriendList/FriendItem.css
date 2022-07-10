@@ -1,60 +1,57 @@
 .frienditem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    padding: 1rem;
-    margin: 1rem auto;
-    background-color: #3e3d46;
-    border-radius: 12px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding: 1rem;
+  margin: 1rem auto;
+  background-color: #3e3d46;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
 
-  .frienditem img {
-    position: relative;
-    border-radius: 50%;
-    height: 3rem;
-    width: 3rem;
-    object-fit: cover;
-  }
-  
+.frienditem img {
+  position: relative;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+}
+
+.frienditem__description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-flow: column-reverse;
+  justify-content: flex-start;
+  flex: 1;
+  text-align: left;
+}
+
+.frienditem h2 {
+  color: #3a3a3a;
+  font-size: 1rem;
+  flex: 1;
+  margin: 0 1rem;
+  color: white;
+}
+
+@media (min-width: 580px) {
   .frienditem__description {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-end;
-    flex-flow: column-reverse;
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-start;
     flex: 1;
-    text-align: left;
   }
-  
-  .frienditem h2 {
-    color: #3a3a3a;
-    font-size: 1rem;
-    flex: 1;
-    margin: 0 1rem;
-    color: white;
-  }
-  
-  
-  @media (min-width: 580px) {
-    .frienditem__description {
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      flex: 1;
-    }
-  
-    .frienditem__description h2 {
-      font-size: 20px;
-    }
 
-    .frienditem__description h3 {
-        font-size: 20px;
-        color: white;
-        margin-right: 20px;
-      }
-  
+  .frienditem__description h2 {
+    font-size: 20px;
   }
-  
+
+  .frienditem__description h3 {
+    font-size: 20px;
+    color: white;
+    margin-right: 20px;
+  }
+}
