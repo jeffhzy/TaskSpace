@@ -1,29 +1,39 @@
 import "./ProfilePage.css";
 import Anon from "../Components/Sidebar/ProfileView/AnonUser.jpg";
+import NUS from "../Components/Sidebar/ProfileView/NUS.png";
 import { Button } from "@mui/material";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage, db } from "../Config/firebaseConfig";
 import { useAuth } from "../Hooks/useAuth";
 import { useState, useEffect } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import Tasks from "../Components/FrontPage/ToDoList/Tasks/Tasks";
+import ProgressBar from "../Components/Sidebar/ProgressBar/ProgressBar";
 
 //takes in userid as id, if it's the current account, just pass props as id=""
 const ProfilePage = (props) => {
   const { user } = useAuth();
   const [imageURL, setImageURL] = useState(Anon);
+  const [coverImageURL, setCoverImageURL] = useState(NUS);
   const userUid = props.id === "" ? user.uid : props.id;
   const [added, setAdded] = useState(props.id === "" ? null : false);
   const [userProfile, setUserProfile] = useState({});
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     getDownloadURL(ref(storage, `${userUid}/profilepic`)).then((url) => {
       setImageURL(url);
     });
+    getDownloadURL(ref(storage, `${userUid}/coverpic`)).then((url) => {
+      setCoverImageURL(url);
+    });
     const getStartInfo = async () => {
       const Data = await getDoc(doc(db, "users", userUid));
       setUserProfile({
         name: Data.data().firstName + " " + Data.data().lastName,
-        level: Math.floor(Data.data().points / 300) + 1,
+        level: Math.floor(Data.data().points / 2) + 1,
+        majorYear: Data.data().year + " " + Data.data().major,
+        progress: Math.floor(((Data.data().points % 2) / 2) * 100) + "%",
       });
       const friendCheck =
         Data.data().friends.filter((i) => i === user.uid).length > 0
@@ -110,26 +120,57 @@ const ProfilePage = (props) => {
     }
   };
 
+  useEffect(() => {
+    const getTasks = async () => {
+      const Data = await getDoc(doc(db, "users", props.id));
+      setTasks(Data.data().tasks);
+    };
+    getTasks();
+  }, []);
+
+  const convertTaskList = (tasklist) => {
+    return tasklist
+      ? tasklist.map((task) =>
+          true
+            ? { id: task.id, title: task.title, date: new Date(task.date) }
+            : {}
+        )
+      : tasklist;
+  };
+
   return (
     <div className="profile-mainPart">
-      <img src={imageURL} alt={Anon} className="profile-icon"></img>
-      <label>{userProfile.name}</label>
-      <label style={{ marginTop: "0px", fontSize: "25px" }}>
-        Level {userProfile.level}
-      </label>
-      {added === null ? (
-        <></>
-      ) : (
-        <Button variant="outlined" color="primary" onClick={requestHandler}>
-          {added === false
-            ? "Send Friend Request"
-            : added === "sent"
-            ? `Friend Request Sent`
-            : added === "request"
-            ? "Accept Friend Request"
-            : "Remove Friend"}
-        </Button>
-      )}
+      <img src={coverImageURL} alt={NUS} className="cover-image" />
+      <img src={imageURL} alt={Anon} className="profile-icon" />
+      <label className="profile-name">{userProfile.name}</label>
+      <label className="profile-majorYear">{userProfile.majorYear}</label>
+      <div className="profile-misc">
+        <label
+          style={{ marginTop: "0px", fontSize: "25px" }}
+          className="profile-level"
+        >
+          Level {userProfile.level}
+          <div className="profile-levelbar"> 
+            <ProgressBar progress={userProfile.progress} />
+          </div>
+        </label>
+        <div className="profile-friend-button">
+          {added === null ? (
+            <></>
+          ) : (
+            <Button variant="outlined" color="primary" onClick={requestHandler}>
+              {added === false
+                ? "Send Friend Request"
+                : added === "sent"
+                ? `Friend Request Sent`
+                : added === "request"
+                ? "Accept Friend Request"
+                : "Remove Friend"}
+            </Button>
+          )}
+        </div>
+      </div>
+      <Tasks tasks={convertTaskList(tasks)} view={true} />
     </div>
   );
 };

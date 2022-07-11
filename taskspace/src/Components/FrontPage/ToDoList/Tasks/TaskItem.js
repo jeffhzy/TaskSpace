@@ -1,6 +1,6 @@
 import TaskDate from "./TaskDate";
-import "./TaskItem.css"
-import Checkbox from '@mui/material/Checkbox';
+import "./TaskItem.css";
+import Checkbox from "@mui/material/Checkbox";
 import TaskMenu from "./TaskMenu";
 import EditTask from "./EditTask";
 import { useState } from "react";
@@ -12,32 +12,55 @@ const TaskItem = (props) => {
 
   const TaskEditingHandler = () => {
     setIsEditing(!isEditing);
-  }
+  };
 
   const SubmitHandler = (newtitle, newdate) => {
     setTaskTitle(newtitle);
     setTaskDate(new Date(newdate));
     props.updateHandler(props.id, newtitle, newdate);
     TaskEditingHandler();
-  }
+  };
 
-  if (!isEditing) {
-    return (
-    <li className="task-item">
-      <div>
-        <TaskDate date={taskDate}></TaskDate>
-      </div>
-      <div className="task-item__description">
-        <h2>{taskTitle}</h2>
-        <Checkbox/>
-        <TaskMenu id={props.id} deleteHandler={props.deleteHandler} editHandler={TaskEditingHandler}/>
-      </div>
-    </li>);
+  if (!props.view) {
+    if (!isEditing) {
+      return (
+        <li className="task-item">
+          <div>
+            <TaskDate date={taskDate}></TaskDate>
+          </div>
+          <div className="task-item__description">
+            <h2>{taskTitle}</h2>
+            <Checkbox />
+            <TaskMenu
+              id={props.id}
+              deleteHandler={props.deleteHandler}
+              editHandler={TaskEditingHandler}
+            />
+          </div>
+        </li>
+      );
+    } else {
+      return (
+        <EditTask
+          title={taskTitle}
+          date={taskDate}
+          cancelHandler={TaskEditingHandler}
+          submitHandler={SubmitHandler}
+        />
+      );
+    }
   } else {
     return (
-       <EditTask title={taskTitle}  date={taskDate} cancelHandler={TaskEditingHandler} submitHandler={SubmitHandler}/>
+      <li className="task-item">
+        <div>
+          <TaskDate date={taskDate}></TaskDate>
+        </div>
+        <div className="task-item__description">
+          <h2>{taskTitle}</h2>
+        </div>
+      </li>
     );
-  };
+  }
 };
 
 export default TaskItem;

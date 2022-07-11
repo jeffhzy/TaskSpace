@@ -18,7 +18,6 @@ const FrontPage = (props) => {
       setTasks(Data.data().tasks);
     };
     getTasks();
-
   }, []);
 
   const addTaskHandler = (task) => {
@@ -73,6 +72,7 @@ const FrontPage = (props) => {
         tasks={convertTaskList(tasks)}
         deleteHandler={deleteTaskHandler}
         updateHandler={updateTaskHandler}
+        view={false}
       />
     </div>
   );
