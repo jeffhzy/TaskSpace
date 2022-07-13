@@ -73,7 +73,8 @@ const Main = () => {
               {allUsers.map((currentUser) => (
                 <Route
                   path={"/profile/" + currentUser.id}
-                  element={<ProfilePage id={currentUser.id} />}
+                  element={<ProfilePage id={currentUser.id} 
+                  key={currentUser.id}/>}
                 />
               ))}
             </Routes>

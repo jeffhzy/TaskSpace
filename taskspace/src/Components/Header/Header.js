@@ -13,7 +13,6 @@ import SearchBar from "./SearchBar";
 import { useAuth } from "../../Hooks/useAuth";
 import { Link } from "react-router-dom";
 
-
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -78,16 +77,32 @@ const Header = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <Link to={"/profile/" + user.uid}>
+                <Link
+                  to={"/profile/" + user.uid}
+                  style={{ textDecoration: "none" }}
+                >
                   <MenuItem key="Profile" onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">Profile</Typography>
+                    <Typography
+                      sx={{
+                        textDecoration: "none !important",
+                        color: "#484848 !important",
+                      }}
+                      textAlign="center"
+                    >
+                      Profile
+                    </Typography>
                   </MenuItem>
                 </Link>
-                <Link style={{textDecoration: null}} to="/account">
+                <Link style={{ textDecoration: "none" }} to="/account">
                   <MenuItem key="Account" onClick={handleCloseUserMenu}>
-                    <Typography 
-                    sx={{textDecoration: "none !important", color: "#484848 !important",}} 
-                    textAlign="center">Account
+                    <Typography
+                      sx={{
+                        textDecoration: "none !important",
+                        color: "#484848 !important",
+                      }}
+                      textAlign="center"
+                    >
+                      Account
                     </Typography>
                   </MenuItem>
                 </Link>

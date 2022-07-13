@@ -19,24 +19,36 @@ const Tasks = (props) => {
       break;
     case "today":
       filtered = props.tasks.filter(
-        (task) => new Date(task.date) <= new Date(today)
+        (task) =>
+          new Date(task.date) <= new Date(today) &&
+          new Date(task.date) >= new Date(today)
       );
       break;
     case "tomorrow":
       filtered = props.tasks.filter(
-        (task) => new Date(task.date) <= new Date(tomorrow)
+        (task) =>
+          new Date(today) <= new Date(task.date) &&
+          new Date(task.date) <= new Date(tomorrow)
       );
       break;
     case "week":
       filtered = props.tasks.filter(
-        (task) => new Date(task.date) <= new Date(nextWeek)
+        (task) =>
+          new Date(today) <= new Date(task.date) &&
+          new Date(task.date) <= new Date(nextWeek)
       );
       break;
     case "month":
       filtered = props.tasks.filter(
-        (task) => new Date(task.date) <= new Date(nextMonth)
+        (task) =>
+          new Date(today) <= new Date(task.date) &&
+          new Date(task.date) <= new Date(nextMonth)
       );
       break;
+    case "overdue":
+      filtered = props.tasks.filter(
+        (task) => new Date(today) > new Date(task.date)
+      );
     default:
       break;
   }

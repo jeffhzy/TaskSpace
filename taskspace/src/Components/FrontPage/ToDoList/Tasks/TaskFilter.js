@@ -16,6 +16,7 @@ const TaskFilter = (props) => {
           <option value="tomorrow">Tomorrow</option>
           <option value="week">This Week</option>
           <option value="month">This Month</option>
+          <option value="overdue">Overdue</option>
         </select>
       </div>
     </div>

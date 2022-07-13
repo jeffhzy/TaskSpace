@@ -150,25 +150,31 @@ const ProfilePage = (props) => {
           className="profile-level"
         >
           Level {userProfile.level}
-          <div className="profile-levelbar"> 
+          <div className="profile-levelbar">
             <ProgressBar progress={userProfile.progress} />
           </div>
         </label>
-        <div className="profile-friend-button">
-          {added === null ? (
-            <></>
-          ) : (
-            <Button variant="outlined" color="primary" onClick={requestHandler}>
-              {added === false
-                ? "Send Friend Request"
-                : added === "sent"
-                ? `Friend Request Sent`
-                : added === "request"
-                ? "Accept Friend Request"
-                : "Remove Friend"}
-            </Button>
-          )}
-        </div>
+        {user.uid !== props.id && (
+          <div className="profile-friend-button">
+            {added === null ? (
+              <></>
+            ) : (
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={requestHandler}
+              >
+                {added === false
+                  ? "Send Friend Request"
+                  : added === "sent"
+                  ? `Friend Request Sent`
+                  : added === "request"
+                  ? "Accept Friend Request"
+                  : "Remove Friend"}
+              </Button>
+            )}
+          </div>
+        )}
       </div>
       <Tasks tasks={convertTaskList(tasks)} view={true} />
     </div>
