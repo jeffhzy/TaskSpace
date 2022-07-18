@@ -1,0 +1,11 @@
+.search-bar {
+  position: relative;
+}
+
+.search-content {
+  background-color: #f2f4f5;
+  width: 400px;
+  position: absolute;
+  z-index: 100;
+  border-radius: 4px;
+}

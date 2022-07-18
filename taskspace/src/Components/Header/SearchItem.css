@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,700;1,400&display=swap");
+
+.search-item {
+  color: black;
+  padding-top: 10px;
+  display: flex;
+  font-family: "Fira Sans", sans-serif;
+  border-radius: 4px;
+}
+
+.search-item:hover {
+  background-color: gray;
+}
+
+.search-item img {
+  position: relative;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+.search-particulars {
+  margin-left: 15px;
+}
+
+.search-particulars_name {
+  font-size: larger;
+  font-style: bold;
+  margin-bottom: 0px;
+}
+
+.search-particulars_majorYear {
+  margin-top: 0px;
+  font-style: italic;
+}

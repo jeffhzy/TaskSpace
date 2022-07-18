@@ -4,7 +4,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import FrontPage from "./FrontPage";
 import Leaderboard from "./Leaderboard";
 import { db } from "../Config/firebaseConfig";
-import { doc, getDoc, setDoc} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import "./Main.css";
@@ -73,8 +73,9 @@ const Main = () => {
               {allUsers.map((currentUser) => (
                 <Route
                   path={"/profile/" + currentUser.id}
-                  element={<ProfilePage id={currentUser.id} 
-                  key={currentUser.id}/>}
+                  element={
+                    <ProfilePage id={currentUser.id} key={currentUser.id} />
+                  }
                 />
               ))}
             </Routes>
