@@ -37,6 +37,7 @@ const Main = () => {
       });
     };
     getStartInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setPointsHandler = (newPoints) => {

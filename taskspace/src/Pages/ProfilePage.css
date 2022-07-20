@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,300&display=swap");
 
+.profile-mainPart {
+  text-align: center;
+}
 .profile-mainPart .profile-icon {
   position: relative;
   border-radius: 50%;
-  height: 13rem;
-  width: 13rem;
-  margin: -6.5rem 0px 0px 500px;
+  height: 12rem;
+  width: 12rem;
+  margin-top: -6rem;
   object-fit: cover;
 }
 
@@ -15,7 +18,6 @@
   height: 300px;
   object-fit: cover;
   overflow: hidden;
-  margin: 2px 0 0 15px;
   filter: brightness(85%);
 }
 
@@ -36,22 +38,36 @@
 
 .profile-misc {
   display: flex;
-  justify-content: space-between;
-  margin-left: 20px;
+  justify-content: center;
+  margin: 2rem auto;
+  width: 50rem;
 }
 
 .profile-level {
     display: flex;
+    margin-left:20rem;
 }
+
+.profile-level-user {
+  display: flex;
+  margin-left:20rem;
+  justify-content: center;
+}
+
 
 .profile-levelbar {
     margin-top: 10px;
 }
 
 .profile-friend-button {
-  width: 300px;
+  margin-right: 2rem;
+  width: 320px;
 }
 
 .profile-mainPart label {
   width: 100%;
+}
+
+.profile-task {
+  text-align: left;
 }

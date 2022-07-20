@@ -7,7 +7,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import ProgressBar from "../../Sidebar/ProgressBar/ProgressBar";
 
-//takes id, name
+//takes id
 const FriendItem = (props) => {
   const [imageURL, setImageURL] = useState(Anon);
   const [name, setName] = useState("");

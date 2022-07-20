@@ -29,18 +29,20 @@ const ProfilePage = (props) => {
     });
     const getStartInfo = async () => {
       const Data = await getDoc(doc(db, "users", userUid));
+      const DataSelf = await getDoc(doc(db, "users", user.uid));
       setUserProfile({
         name: Data.data().firstName + " " + Data.data().lastName,
         level: Math.floor(Data.data().points / 2) + 1,
         majorYear: Data.data().year + " " + Data.data().major,
         progress: Math.floor(((Data.data().points % 2) / 2) * 100) + "%",
+        requests: Data.data().requests,
       });
       const friendCheck =
         Data.data().friends.filter((i) => i === user.uid).length > 0
           ? true
           : false;
       const requestCheck =
-        Data.data().requests.filter((i) => i === user.uid).length > 0
+        DataSelf.data().requests.filter((i) => i === userUid).length > 0
           ? "request"
           : false;
       friendCheck ? setAdded(true) : setAdded(requestCheck);
@@ -105,7 +107,7 @@ const ProfilePage = (props) => {
       const sendRequest = async () => {
         await setDoc(
           doc(db, "users", userUid),
-          { requests: [user.uid] },
+          { requests: [...userProfile.requests, user.uid] },
           { merge: true }
         );
       };
@@ -131,10 +133,10 @@ const ProfilePage = (props) => {
   const convertTaskList = (tasklist) => {
     return tasklist
       ? tasklist.map((task) =>
-          true
-            ? { id: task.id, title: task.title, date: new Date(task.date) }
-            : {}
-        )
+        true
+          ? { id: task.id, title: task.title, date: new Date(task.date) }
+          : {}
+      )
       : tasklist;
   };
 
@@ -146,8 +148,8 @@ const ProfilePage = (props) => {
       <label className="profile-majorYear">{userProfile.majorYear}</label>
       <div className="profile-misc">
         <label
-          style={{ marginTop: "0px", fontSize: "25px" }}
-          className="profile-level"
+          style={{ marginTop: "0px", fontSize: "25px", marginLeft: "5%" }}
+          className={props.id !== user.uid ? "profile-level" : "profile-level-user"}
         >
           Level {userProfile.level}
           <div className="profile-levelbar">
@@ -167,16 +169,18 @@ const ProfilePage = (props) => {
                 {added === false
                   ? "Send Friend Request"
                   : added === "sent"
-                  ? `Friend Request Sent`
-                  : added === "request"
-                  ? "Accept Friend Request"
-                  : "Remove Friend"}
+                    ? `Friend Request Sent`
+                    : added === "request"
+                      ? "Accept Friend Request"
+                      : "Remove Friend"}
               </Button>
             )}
           </div>
         )}
       </div>
-      <Tasks tasks={convertTaskList(tasks)} view={true} />
+      <div className="profile-task">
+        <Tasks tasks={convertTaskList(tasks)} view={true} />
+      </div>
     </div>
   );
 };

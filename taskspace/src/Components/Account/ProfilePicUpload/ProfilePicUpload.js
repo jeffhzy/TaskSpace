@@ -32,9 +32,14 @@ const ProfilePicUpload = () => {
   };
 
   const hiddenFileInput = useRef(null);
+  const hiddenFileInputCover = useRef(null);
 
   const handleClick = () => {
     hiddenFileInput.current.click();
+  };
+
+  const handleClickCover = () => {
+    hiddenFileInputCover.current.click();
   };
 
   const uploadProcess = () => {
@@ -84,14 +89,14 @@ const ProfilePicUpload = () => {
       <div className="uploadpic-container">
         <input
           type="file"
-          ref={hiddenFileInput}
+          ref={hiddenFileInputCover}
           style={{ display: "none" }}
           onChange={(e) => {
             setCoverImageUpload(e.target.files[0]);
             console.log(e.target.files[0]);
           }}
         />
-        <Button variant="contained" color="primary" onClick={handleClick}>
+        <Button variant="contained" color="primary" onClick={handleClickCover}>
           Select Cover Picture
         </Button>
         <Button variant="contained" color="primary" onClick={uploadProcessCover}>
