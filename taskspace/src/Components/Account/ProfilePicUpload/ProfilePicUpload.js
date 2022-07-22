@@ -68,7 +68,6 @@ const ProfilePicUpload = () => {
           style={{ display: "none" }}
           onChange={(e) => {
             setImageUpload(e.target.files[0]);
-            console.log(e.target.files[0]);
           }}
         />
         <Button variant="contained" color="primary" onClick={handleClick}>
