@@ -2,7 +2,7 @@ import Ranking from "../Components/Leaderboard/Ranking";
 import { useState, useEffect } from "react";
 import { Container } from "@mui/system";
 import "./Leaderboard.css";
-import getContentData from "../Others/ImportAllData";
+import { getContentData } from "../Others/ImportAllData";
 import { useAuth } from "../Hooks/useAuth";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../Config/firebaseConfig";

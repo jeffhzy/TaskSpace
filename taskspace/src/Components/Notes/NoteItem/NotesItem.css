@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&display=swap");
+
+.notesitem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50rem;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  background-color: #52525a;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+
+.notesitem__description {
+  display: flex;
+  gap: 1rem; 
+  align-items: flex-end;
+  flex-flow: column-reverse;
+  justify-content: space-between;
+  flex: 1;
+  text-align: left;
+}
+
+.notesitem h2 {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 1rem;
+  flex: 1;
+  margin: 0 1rem;
+  color: white;
+}
+
+.notesitem h3 {
+  margin: 0 1rem;
+}
+
+.notesitem_left {
+    display: flex;
+}
+
+@media (min-width: 580px) {
+  .notesitem__description {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+  }
+
+  .notesitem__description h2 {
+    font-size: 20px;
+  }
+
+  .notesitem__description h3 {
+    font-size: 20px;
+    color: white;
+    margin-right: 20px;
+  }
+}

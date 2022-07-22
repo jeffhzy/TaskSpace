@@ -28,6 +28,8 @@ const Signup = (props) => {
             tasks: [],
             requests: [],
             friends: [],
+            notes: [],
+            likedNotes: [],
           };
           signup(data.email, data.password, userdetails).catch(error => setValidSignup(false));
         })

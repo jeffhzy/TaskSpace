@@ -1,0 +1,18 @@
+.notesInfo {
+    text-align: center;
+    margin: 2rem auto;
+    width: 90%
+}
+
+.notesInfo h2 {
+    margin: 1rem auto;
+}
+
+.notesInfo h5 {
+    margin: 1rem auto;
+}
+
+.notesInfo label {
+    margin-bottom: 1rem;
+    color: grey;
+}

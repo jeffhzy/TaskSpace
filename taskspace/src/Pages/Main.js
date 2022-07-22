@@ -9,21 +9,26 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import "./Main.css";
 import Chats from "./Chats";
+import NoteinfoPage from "./NoteinfoPage";
 import Notes from "./Notes";
 import FriendPage from "./FriendPage";
 import AccountPage from "./AccountPage";
 import ProfilePage from "./ProfilePage";
-import getContentData from "../Others/ImportAllData";
+import NotesInfo from "./NoteinfoPage";
+import { getContentData, getNotesData } from "../Others/ImportAllData";
 
 const Main = () => {
   const { user } = useAuth();
   const [userProfile, setUserProfile] = useState("");
   const [exp, setExp] = useState(0);
   const [allUsers, setAllUsers] = useState([]);
+  const [allNotes, setAllNotes] = useState([]);
 
   useEffect(() => {
     getContentData().then(setAllUsers);
+    getNotesData().then(setAllNotes);
   }, [allUsers]);
+
 
   //to get from database
   useEffect(() => {
@@ -37,7 +42,7 @@ const Main = () => {
       });
     };
     getStartInfo();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setPointsHandler = (newPoints) => {
@@ -76,6 +81,14 @@ const Main = () => {
                   path={"/profile/" + currentUser.id}
                   element={
                     <ProfilePage id={currentUser.id} key={currentUser.id} />
+                  }
+                />
+              ))}
+              {allNotes.map((currentNote) => (
+                <Route
+                  path={"/notes/" + currentNote.id}
+                  element={
+                    <NoteinfoPage id={currentNote.id} key={currentNote.id} />
                   }
                 />
               ))}
