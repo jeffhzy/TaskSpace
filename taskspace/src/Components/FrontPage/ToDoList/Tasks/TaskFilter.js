@@ -6,8 +6,20 @@ const TaskFilter = (props) => {
     props.onDateChange(event.target.value);
   }
 
+  const changeStatusHandler = (event) => {
+    props.onStatusChange(event.target.value);
+  }
+
   return (
     <div className="task-filter">
+      <div className="task-filter__control">
+        <label>Filter by status</label>
+        <select value={props.selectedStatus} onChange={changeStatusHandler} className="status-options">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="not completed">Not Completed</option>
+        </select>
+      </div>
       <div className="task-filter__control">
         <label>Filter by due date</label>
         <select value={props.selected}  onChange={changeDateHandler}>

@@ -4,13 +4,14 @@ import { Container } from "@mui/system";
 import "./Leaderboard.css";
 import { getContentData } from "../Others/ImportAllData";
 import { useAuth } from "../Hooks/useAuth";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, onSnapshot, collection } from "firebase/firestore";
 import { db } from "../Config/firebaseConfig";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
   const [friendsID, setFriendsID] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [filter, setFilter] = useState("all");
   const { user } = useAuth();
 
@@ -33,6 +34,19 @@ const Leaderboard = () => {
       getFriendObj(friendID).then((obj) => friends.push(obj));
     });
   }, [friendsID]);
+
+  // useEffect(() => {
+  //   const getAllUsers = async () => {
+  //     onSnapshot(collection(db, "users"), (documents) => {
+  //       const tempUsers = [];
+  //       documents.forEach((document) => {
+  //         tempUsers.push(document);
+  //       });
+  //       setAllUsers(tempUsers);
+  //     });
+  //   };
+  //   getAllUsers();
+  // }, []);
 
   const setAllHandler = () => {
     setFilter("all");

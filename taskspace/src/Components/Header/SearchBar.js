@@ -37,11 +37,12 @@ const SearchBar = () => {
         " " +
         user.data().lastName.toLowerCase();
       if (
-        user.data().firstName.toLowerCase().includes(search) ||
-        user.data().lastName.toLowerCase().includes(search) ||
-        user.data().major.toLowerCase().includes(search) ||
-        user.data().year.toLowerCase().includes(search) ||
-        fullName.includes(search)
+        user.data().firstName.toLowerCase().startsWith(search) ||
+        user.data().lastName.toLowerCase().startsWith(search) ||
+        user.data().major.toLowerCase().startsWith(search) ||
+        user.data().year.toLowerCase().startsWith(search) ||
+        user.data().year.toLowerCase().includes(search)||
+        fullName.startsWith(search)
       ) {
         filteredList.push(user);
       }
