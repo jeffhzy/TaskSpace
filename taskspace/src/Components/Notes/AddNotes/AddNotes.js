@@ -38,7 +38,7 @@ const AddNotes = () => {
     useEffect(() => {
         queryNotes();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    });
+    }, []);
 
     const submitHandler = () => {
         const addToFirebase = async () => {
@@ -50,6 +50,7 @@ const AddNotes = () => {
                     const currentNotes = docSnap.data().notes;
                     currentNotes.push(note.id);
                     await setDoc(doc(db, "users", user.uid), { notes: currentNotes }, { merge: true })
+                    setNotesID(currentNotes);
                 }
                 );
 
@@ -57,7 +58,6 @@ const AddNotes = () => {
         addToFirebase();
         cancelHandler();
         setAdding(true);
-        queryNotes();
     };
 
     const cancelHandler = () => {

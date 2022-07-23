@@ -23,10 +23,10 @@ const ProfilePage = (props) => {
   useEffect(() => {
     getDownloadURL(ref(storage, `${userUid}/profilepic`)).then((url) => {
       setImageURL(url);
-    });
+    },(error) => {});
     getDownloadURL(ref(storage, `${userUid}/coverpic`)).then((url) => {
       setCoverImageURL(url);
-    });
+    },(error) => {});
     const getStartInfo = async () => {
       const Data = await getDoc(doc(db, "users", userUid));
       const DataSelf = await getDoc(doc(db, "users", user.uid));

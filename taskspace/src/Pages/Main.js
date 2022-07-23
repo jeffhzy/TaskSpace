@@ -27,7 +27,7 @@ const Main = () => {
   useEffect(() => {
     getContentData().then(setAllUsers);
     getNotesData().then(setAllNotes);
-  }, [allUsers]);
+  }, [allUsers, allNotes]);
 
 
   //to get from database

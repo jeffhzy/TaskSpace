@@ -4,7 +4,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, getDownloadURL, listAll, getBytes } from "firebase/storage";
+import { ref, getDownloadURL, listAll } from "firebase/storage";
 import { storage, db } from "../Config/firebaseConfig";
 import { useAuth } from "../Hooks/useAuth";
 
@@ -17,18 +17,11 @@ const NotesInfo = (props) => {
     const [date, setDate] = useState("");
     const [desc, setDesc] = useState("");
     const [owner, setOwner] = useState("");
+    const [ownerID, setOwnerID] = useState("");
     const [file, setFile] = useState(null);
     const [liked, setLiked] = useState(false);
 
     useEffect(() => {
-        listAll(ref(storage, `${props.id}`)).then((res) => {
-            if (res.items.length > 0) {
-                getDownloadURL(ref(storage, `notes/${props.id}/file`))
-                    .then((url) => {
-                        setFile(url);
-                    }, (error) => { });
-            }
-        })
         const getInfo = async () => {
             const notesSnap = await getDoc(doc(db, "notes", props.id));
             const notesData = notesSnap.data();
@@ -39,11 +32,12 @@ const NotesInfo = (props) => {
             setLikes(notesData.likes);
             setDate(notesData.date);
             setDesc(notesData.desc);
+            setOwnerID(ownerSnap.id);
             setOwner(ownerData.firstName + " " + ownerData.lastName);
 
             const userSnap = await getDoc(doc(db, "users", user.uid));
             const userData = userSnap.data();
-  
+
             if (userData.likedNotes.includes(props.id)) { setLiked(true) }
         };
         getInfo();
@@ -51,17 +45,16 @@ const NotesInfo = (props) => {
         const download = () => {
             listAll(ref(storage, `${user.uid}`)).then((res) => {
                 if (res.items.length > 0) {
-                getDownloadURL(ref(storage, `notes/${props.id}/file`))
-                .then((url) => {
-                    setFile(url);
-                },(error) => {});
-            }
+                    getDownloadURL(ref(storage, `notes/${props.id}/file`))
+                        .then((url) => {
+                            setFile(url);
+                        }, (error) => { });
+                }
             })
         }
         download();
-        console.log(file);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    })
+    }, [])
 
     const changeLiked = async () => {
 
@@ -80,12 +73,11 @@ const NotesInfo = (props) => {
             changed = allLiked;
             newlikes++
         }
-        console.log(changed);
         await setDoc(doc(db, "users", user.uid), { likedNotes: changed }, { merge: true });
         await setDoc(doc(db, "notes", props.id), { likes: newlikes }, { merge: true });
+        setLikes(newlikes);
         setLiked(!liked);
     }
-
 
     return (
         <div className="notesInfo">
@@ -98,6 +90,7 @@ const NotesInfo = (props) => {
             <div>
                 <a href={file} download><Button variant="contained">View</Button></a>
             </div>
+            
 
         </div>
     )
