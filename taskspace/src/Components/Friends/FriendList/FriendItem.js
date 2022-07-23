@@ -23,7 +23,7 @@ const FriendItem = (props) => {
       setLevel(Math.floor(userData.points / 2) + 1);
     };
     getName();
-  });
+  }, []);
 
   useEffect(() => {
     listAll(ref(storage, `${props.id}`)).then((res) => {

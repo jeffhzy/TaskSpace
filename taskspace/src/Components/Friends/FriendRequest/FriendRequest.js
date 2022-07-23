@@ -21,8 +21,7 @@ const FriendRequest = (props) => {
             setRequestName(userData.firstName + " " + userData.lastName);
         };
         getName();
-    }
-    );
+    }, []);
 
 
 
