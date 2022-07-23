@@ -21,12 +21,6 @@ const SidebarOptions = () => {
           Friends
         </button>
       </Link>
-      <Link to="/chats">
-        <button>
-          <ChatIcon />
-          Chats
-        </button>
-      </Link>
       <Link to="/notes">
         <button>
           <NotesIcon />

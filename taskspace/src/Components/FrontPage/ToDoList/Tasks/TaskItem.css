@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,100&display=swap');
+
 .task-item {
   display: flex;
   justify-content: space-between;
@@ -11,13 +13,12 @@
 
 .task-item__description {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  /* flex-direction: column;
   align-items: flex-end;
-  flex-flow: column-reverse;
-  justify-content: flex-start;
-  flex: 1;
-  text-align: left;
+  flex-flow: column-reverse; */
+  /* justify-content: space-between; */
+  /* flex: 1; */
+  /* text-align: left; */
 }
 
 .task-item h2 {
@@ -28,6 +29,26 @@
   color: white;
 }
 
+.task-item__rhs {
+  margin-right: 10px;
+  margin-bottom: -20px;
+}
+
+.time-taken {
+  font-family: "Fira Sans", sans-serif;
+  font-style: italic;
+  margin-top: 0px;
+  color: white;
+}
+
+.task-item__misc {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.task-item__menu {
+  margin-top: 6px;
+}
 
 @media (min-width: 580px) {
   .task-item__description {
@@ -40,5 +61,4 @@
   .task-item__description h2 {
     font-size: 1.5rem;
   }
-
 }

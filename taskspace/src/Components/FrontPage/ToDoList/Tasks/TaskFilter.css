@@ -1,19 +1,22 @@
 .task-filter {
   color: white;
   padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .task-filter__control {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
-  margin: 1rem 0;
+  margin: 1rem 0.5rem;
 }
 
 .task-filter label {
+  font-size: 15px;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  margin-right: 10px;
 }
 
 .task-filter select {
@@ -21,4 +24,7 @@
   padding: 0.5rem 3rem;
   font-weight: bold;
   border-radius: 6px;
+  width: 206px;
 }
+
+

@@ -6,9 +6,10 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage, db } from "../Config/firebaseConfig";
 import { useAuth } from "../Hooks/useAuth";
 import { useState, useEffect } from "react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
 import Tasks from "../Components/FrontPage/ToDoList/Tasks/Tasks";
 import ProgressBar from "../Components/Sidebar/ProgressBar/ProgressBar";
+import TaskList from "../Components/FrontPage/ToDoList/Tasks/TaskList";
 
 //takes in userid as id, if it's the current account, just pass props as id=""
 const ProfilePage = (props) => {
@@ -122,8 +123,9 @@ const ProfilePage = (props) => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const Data = await getDoc(doc(db, "users", props.id));
-      setTasks(Data.data().tasks);
+      onSnapshot(doc(db, "users", props.id), (document) => {
+        setTasks(document.data().tasks);
+      });
     };
     getTasks();
   }, []);
@@ -132,7 +134,13 @@ const ProfilePage = (props) => {
     return tasklist
       ? tasklist.map((task) =>
           true
-            ? { id: task.id, title: task.title, date: new Date(task.date) }
+            ? {
+                id: task.id,
+                title: task.title,
+                date: new Date(task.date),
+                completed: task.completed,
+                timeTaken: task.timeTaken
+              }
             : {}
         )
       : tasklist;

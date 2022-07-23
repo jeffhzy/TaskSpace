@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./TaskForm.css";
-import {today} from "../../../../Others/Dates";
+import { today } from "../../../../Others/Dates";
 
 const TaskForm = (props) => {
   const [enteredTask, setEnteredTask] = useState("");
@@ -16,10 +16,11 @@ const TaskForm = (props) => {
   };
 
   const submitHandler = () => {
-
     const taskData = {
       title: enteredTask,
       date: enteredDate,
+      completed: false,
+      timeTaken: 0,
     };
 
     props.onSaveTaskData(taskData);
@@ -30,13 +31,13 @@ const TaskForm = (props) => {
 
   const validSubmitHandler = (event) => {
     event.preventDefault();
-    if (!(enteredTask!=="" && enteredDate!=="")) {
+    if (!(enteredTask !== "" && enteredDate !== "")) {
       setIsValid(false);
     } else {
       setIsValid(true);
       submitHandler();
     }
-  }
+  };
 
   return (
     <form onSubmit={validSubmitHandler}>
@@ -56,7 +57,11 @@ const TaskForm = (props) => {
         </div>
       </div>
       <div className="new-task__actions">
-      {isValid!==true ? <label>*Missing fields: Please fill in missing data</label> : <></>}
+        {isValid !== true ? (
+          <label>*Missing fields: Please fill in missing data</label>
+        ) : (
+          <></>
+        )}
         <button type="button" onClick={props.onCancel}>
           Cancel
         </button>

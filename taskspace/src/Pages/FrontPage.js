@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Timer from "../Components/FrontPage/Timer/Timer";
 import { useAuth } from "../Hooks/useAuth";
 import { db } from "../Config/firebaseConfig";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore";
 
 const FrontPage = (props) => {
   const { user } = useAuth();
@@ -14,8 +14,9 @@ const FrontPage = (props) => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const Data = await getDoc(doc(db, "users", user.uid));
-      setTasks(Data.data().tasks);
+      onSnapshot(doc(db, "users", user.uid), (document) => {
+        setTasks(document.data().tasks);
+      });
     };
     getTasks();
   }, []);
@@ -34,7 +35,7 @@ const FrontPage = (props) => {
     setTasks(
       tasks.map((task) =>
         task.id === taskId
-          ? { id: taskId, title: newtitle, date: newdate }
+          ? { id: taskId, title: newtitle, date: newdate, completed: false }
           : task
       )
     );
@@ -44,10 +45,36 @@ const FrontPage = (props) => {
     return tasklist
       ? tasklist.map((task) =>
           true
-            ? { id: task.id, title: task.title, date: new Date(task.date) }
+            ? {
+                id: task.id,
+                title: task.title,
+                date: new Date(task.date),
+                completed: task.completed,
+                timeTaken: task.timeTaken,
+              }
             : {}
         )
       : tasklist;
+  };
+
+  const recordTimeHandler = async (time, selectedTask) => {
+    const tempTasks = [];
+    if (selectedTask !== null) {
+      let newTask;
+      for (const num in tasks) {
+        const task = tasks[num];
+        if (task.title == selectedTask) {
+          const newTimeTaken = task.timeTaken + time;
+          newTask = { ...task, timeTaken: newTimeTaken };
+          tempTasks.push(newTask);
+        } else {
+          tempTasks.push(task);
+        }
+      }
+      await updateDoc(doc(db, "users", user.uid), { tasks: tempTasks });
+    }
+    console.log(time);
+    console.log(selectedTask);
   };
 
   //to add to-do list data to database
@@ -66,8 +93,11 @@ const FrontPage = (props) => {
 
   return (
     <div>
-      <Timer setPointHandler={props.changeExp} />
-      <NewTask onAddTask={addTaskHandler}></NewTask>
+      <Timer
+        setPointHandler={props.changeExp}
+        onRecordTime={recordTimeHandler}
+      />
+      <NewTask onAddTask={addTaskHandler} />
       <Tasks
         tasks={convertTaskList(tasks)}
         deleteHandler={deleteTaskHandler}

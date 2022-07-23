@@ -6,60 +6,82 @@ import "./Tasks.css";
 
 const Tasks = (props) => {
   const [filteredDate, setFilteredDate] = useState("all");
+  const [filteredStatus, setFilteredStatus] = useState("all");
 
   const dateChangeHandler = (dateOption) => {
     setFilteredDate(dateOption);
   };
 
-  let filtered;
+  const statusChangeHandler = (statusOption) => {
+    setFilteredStatus(statusOption);
+  }
 
-  switch (filteredDate) {
+  let filtered;
+  let finalFiltered;
+
+  switch (filteredStatus) {
     case "all":
       filtered = props.tasks;
       break;
+    case "completed":
+      filtered = props.tasks.filter((task) => task.completed === true);
+      break;
+    case "not completed":
+      filtered = props.tasks.filter((task) => task.completed === false);
+      break;
+    default:
+      break;
+  }
+
+  switch (filteredDate) {
+    case "all":
+      finalFiltered = filtered;
+      break;
     case "today":
-      filtered = props.tasks.filter(
+      finalFiltered = filtered.filter(
         (task) =>
           new Date(task.date) <= new Date(today) &&
           new Date(task.date) >= new Date(today)
       );
       break;
     case "tomorrow":
-      filtered = props.tasks.filter(
+      finalFiltered = filtered.filter(
         (task) =>
           new Date(today) <= new Date(task.date) &&
           new Date(task.date) <= new Date(tomorrow)
       );
       break;
     case "week":
-      filtered = props.tasks.filter(
+      finalFiltered = filtered.filter(
         (task) =>
           new Date(today) <= new Date(task.date) &&
           new Date(task.date) <= new Date(nextWeek)
       );
       break;
     case "month":
-      filtered = props.tasks.filter(
+      finalFiltered = filtered.filter(
         (task) =>
           new Date(today) <= new Date(task.date) &&
           new Date(task.date) <= new Date(nextMonth)
       );
       break;
     case "overdue":
-      filtered = props.tasks.filter(
+      finalFiltered = filtered.filter(
         (task) => new Date(today) > new Date(task.date)
       );
     default:
       break;
   }
 
-  const sortedList = filtered.sort((a, b) => a.date - b.date);
+  const sortedList = finalFiltered.sort((a, b) => a.date - b.date);
 
   return (
     <div className="tasks">
       <TaskFilter
         selected={filteredDate}
         onDateChange={dateChangeHandler}
+        selectedStatus={filteredStatus}
+        onStatusChange={statusChangeHandler}
       ></TaskFilter>
       <TaskList
         items={sortedList}
