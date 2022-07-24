@@ -3,6 +3,7 @@ import { db } from "../Config/firebaseConfig";
 
 const contentData = [];
 const email = [];
+const notesID = [];
 const notesData = [];
 
 const getContentData = () => {
@@ -23,12 +24,14 @@ const getNotesData = () => {
   return new Promise((resolve) => {
     getDocs(collection(db, "notes")).then((docs) => {
       docs.forEach((doc) => {
+        if (notesID.indexOf(doc.id) === -1) {
           notesData.push(doc);
+          notesID.push(doc.id);
+        }
       });
     });
     resolve(notesData);
   });
 };
-
 
 export { getContentData, getNotesData };

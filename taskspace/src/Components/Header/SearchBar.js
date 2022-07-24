@@ -3,19 +3,26 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
-import { getContentData } from "../../Others/ImportAllData";
+import { getContentData, getNotesData } from "../../Others/ImportAllData";
 import SearchItem from "./SearchItem";
 import "./SearchBar.css";
+import SearchNoteItem from "./SearchNoteItem";
 
 const SearchBar = () => {
   const [enteredSearch, setEnteredSearch] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [allNotes, setAllNotes] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
   const [openSearch, setOpenSearch] = useState(false);
 
   useEffect(() => {
     getContentData().then(setAllUsers);
   }, [allUsers]);
+
+  useEffect(() => {
+    getNotesData().then(setAllNotes);
+  }, [allNotes]);
 
   const searchChangeHandler = (event) => {
     if (event.target.value === "") {
@@ -25,11 +32,13 @@ const SearchBar = () => {
     }
     setEnteredSearch(event.target.value);
     setFilteredUsers(filterList(event.target.value));
+    setFilteredNotes(filterNotes(event.target.value));
   };
 
   const filterList = (query) => {
     const search = query.toLowerCase();
     const filteredList = [];
+    const filteredNote = [];
     for (const num in allUsers) {
       const user = allUsers[num];
       const fullName =
@@ -41,10 +50,25 @@ const SearchBar = () => {
         user.data().lastName.toLowerCase().startsWith(search) ||
         user.data().major.toLowerCase().startsWith(search) ||
         user.data().year.toLowerCase().startsWith(search) ||
-        user.data().year.toLowerCase().includes(search)||
+        user.data().year.toLowerCase().includes(search) ||
         fullName.startsWith(search)
       ) {
         filteredList.push(user);
+      }
+    }
+    return filteredList;
+  };
+
+  const filterNotes = (query) => {
+    const search = query.toLowerCase();
+    const filteredList = [];
+    for (const num in allNotes) {
+      const note = allNotes[num];
+      if (
+        note.data().title.toLowerCase().includes(search) ||
+        note.data().module.toLowerCase().includes(search)
+      ) {
+        filteredList.push(note);
       }
     }
     return filteredList;
@@ -86,6 +110,17 @@ const SearchBar = () => {
               major={student.data().major}
               id={student.id}
               key={student.data().email}
+              onSearch={setOpenSearch}
+              onResetSearch={setEnteredSearch}
+            />
+          ))}
+        {openSearch &&
+          filteredNotes.map((note) => (
+            <SearchNoteItem
+              title={note.data().title}
+              mod={note.data().module.toUpperCase()}
+              id={note.id}
+              key={note.id}
               onSearch={setOpenSearch}
               onResetSearch={setEnteredSearch}
             />

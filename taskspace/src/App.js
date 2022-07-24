@@ -8,6 +8,7 @@ import { db } from "./Config/firebaseConfig";
 const App = () => {
   const { user } = useAuth();
   const [allUsers, setAllUsers] = useState([]);
+  const [allNotes, setAllNotes] = useState([]);
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -19,6 +20,17 @@ const App = () => {
     };
     getAllUsers();
   }, [allUsers]);
+
+  useEffect(() => {
+    const getAllNotes = async () => {
+      const requestSnap = onSnapshot(collection(db, "notes"), (docs) => {
+        docs.forEach((doc) => {
+          allNotes.push(doc);
+        });
+      });
+    };
+    getAllNotes();
+  }, [allNotes]);
 
   return <div>{user ? <Main /> : <LoginPage />};</div>;
 };
