@@ -43,7 +43,7 @@ const NotesInfo = (props) => {
         getInfo();
 
         const download = () => {
-            listAll(ref(storage, `${user.uid}`)).then((res) => {
+            listAll(ref(storage, `notes/${props.id}`)).then((res) => {
                 if (res.items.length > 0) {
                     getDownloadURL(ref(storage, `notes/${props.id}/file`))
                         .then((url) => {
