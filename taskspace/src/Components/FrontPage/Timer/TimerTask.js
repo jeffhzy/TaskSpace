@@ -15,7 +15,9 @@ const TimerTask = (props) => {
         const tasks = document.data().tasks;
         for (const num in tasks) {
           const task = tasks[num];
-          temp.push(task.title);
+          if (!task.completed) {
+            temp.push(task.title);
+          }
         }
         setTaskTitles(temp);
       });
