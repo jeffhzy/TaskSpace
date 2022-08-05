@@ -32,9 +32,9 @@ const ProfilePage = (props) => {
       const DataSelf = await getDoc(doc(db, "users", user.uid));
       setUserProfile({
         name: Data.data().firstName + " " + Data.data().lastName,
-        level: Math.floor(Data.data().points / 2) + 1,
+        level: Math.floor(Data.data().points / 300) + 1,
         majorYear: Data.data().year + " " + Data.data().major,
-        progress: Math.floor(((Data.data().points % 2) / 2) * 100) + "%",
+        progress: Math.floor(((Data.data().points % 300) / 300) * 100) + "%",
         requests: Data.data().requests,
       });
       const friendCheck =

@@ -37,7 +37,7 @@ const Main = () => {
       setUserProfile({
         name: Data.data().firstName + " " + Data.data().lastName,
         expVal: Data.data().points,
-        expMax: 2,
+        expMax: 300,
       });
     };
     getStartInfo();

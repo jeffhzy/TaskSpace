@@ -18,9 +18,9 @@ const FriendItem = (props) => {
     const getName = async () => {
       const userSnap = await getDoc(doc(db, "users", props.id));
       const userData = userSnap.data();
-      setProgress(Math.floor(((userData.points % 2) / 2) * 100) + "%");
+      setProgress(Math.floor(((userData.points % 300) / 300) * 100) + "%");
       setName(userData.firstName + " " + userData.lastName);
-      setLevel(Math.floor(userData.points / 2) + 1);
+      setLevel(Math.floor(userData.points / 300) + 1);
     };
     getName();
   }, []);
